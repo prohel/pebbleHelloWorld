@@ -4,9 +4,9 @@
     "appKeys": {
         "hello_msg": 0
     },
-    "longName": "hello world",
+    "longName": "Weather",
     "versionCode": 1,
-    "shortName": "hello world",
+    "shortName": "Weather",
     "companyName": "pierrerohel@gmail.com",
     "capabilities": [
         ""
@@ -15,6 +15,12 @@
         "watchface": false
     },
     "resources": {
-        "media": []
+        "media": [
+            {
+                "type": "png",
+                "name": "MINION",
+                "file": "images/minion.png"
+            }
+        ]
     }
 }

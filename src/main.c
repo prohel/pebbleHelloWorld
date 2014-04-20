@@ -1,10 +1,11 @@
 #include <pebble.h>
- 
+  
 static char msg[100];
 static bool celsius = true;
 static Window *window;
 static TextLayer *hello_layer;
-
+GBitmap *future_bitmap;
+BitmapLayer *future_layer;
 /* This is called when the select button is clicked */
 void select_click_handler(ClickRecognizerRef recognizer, void *context) {
   if (celsius) {
@@ -21,11 +22,27 @@ void select_click_handler(ClickRecognizerRef recognizer, void *context) {
   app_message_outbox_send();
 }
 
+void init_minion_handler(ClickRecognizerRef recognizer, void *context) {
+  Layer *window_layer = window_get_root_layer(window);
+  GRect bounds = layer_get_bounds(window_layer);
+ future_bitmap = gbitmap_create_with_resource(RESOURCE_ID_MINION);
+  future_layer = bitmap_layer_create((GRect) { .origin = { 0, 0 }, .size = { bounds.size.w, bounds.size.h } });
+  bitmap_layer_set_bitmap(future_layer, future_bitmap);
+  layer_add_child(window_get_root_layer(window), bitmap_layer_get_layer(future_layer));
+}
 
+void destroy_minion_handler(ClickRecognizerRef recognizer, void *context) {
+  //Destroy GBitmaps
+  gbitmap_destroy(future_bitmap);
+ 
+  //Destroy BitmapLayers
+  bitmap_layer_destroy(future_layer);
+}
 
 /* this registers the appropriate function to the appropriate button */
 void config_provider(void *context) {
   window_single_click_subscribe(BUTTON_ID_SELECT, select_click_handler);
+  window_long_click_subscribe(BUTTON_ID_UP, 0, init_minion_handler, destroy_minion_handler);
 }
 
 
@@ -72,8 +89,7 @@ void in_dropped_handler(AppMessageResult reason, void *context) {
 
 static void window_load(Window *window) {
  Layer *window_layer = window_get_root_layer(window);
- GRect bounds = layer_get_bounds(window_layer);
-
+  GRect bounds = layer_get_bounds(window_layer);
  hello_layer = text_layer_create((GRect) { .origin = { 0, 20 }, .size = { bounds.size.w, bounds.size.h } });
  DictionaryIterator *iter;
   app_message_outbox_begin(&iter);
@@ -98,7 +114,6 @@ static void init(void) {
  
  // need this for adding the listener
  window_set_click_config_provider(window, config_provider);
-
  // for registering AppMessage handlers
  app_message_register_inbox_received(in_received_handler);
  app_message_register_inbox_dropped(in_dropped_handler);
@@ -114,6 +129,11 @@ static void init(void) {
 
 static void deinit(void) {
  window_destroy(window);
+  //Destroy GBitmaps
+gbitmap_destroy(future_bitmap);
+ 
+//Destroy BitmapLayers
+bitmap_layer_destroy(future_layer);
 }
 
 int main(void) {
