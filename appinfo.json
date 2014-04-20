@@ -1,0 +1,20 @@
+{
+    "versionLabel": "1.0",
+    "uuid": "32ab5abb-26d0-442a-9d4f-989dda780b07",
+    "appKeys": {
+        "hello_msg": 0
+    },
+    "longName": "hello world",
+    "versionCode": 1,
+    "shortName": "hello world",
+    "companyName": "pierrerohel@gmail.com",
+    "capabilities": [
+        ""
+    ],
+    "watchapp": {
+        "watchface": false
+    },
+    "resources": {
+        "media": []
+    }
+}
