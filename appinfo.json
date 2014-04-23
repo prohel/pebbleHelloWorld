@@ -1,18 +1,18 @@
 {
-    "versionLabel": "1.0",
     "uuid": "32ab5abb-26d0-442a-9d4f-989dda780b07",
-    "appKeys": {
-        "hello_msg": 0
+    "watchapp": {
+        "watchface": false
     },
-    "longName": "Weather",
-    "versionCode": 1,
-    "shortName": "Weather",
+    "versionLabel": "1.0",
     "companyName": "pierrerohel@gmail.com",
     "capabilities": [
         ""
     ],
-    "watchapp": {
-        "watchface": false
+    "shortName": "Weather",
+    "longName": "Weather",
+    "versionCode": 1,
+    "appKeys": {
+        "hello_msg": 0
     },
     "resources": {
         "media": [
