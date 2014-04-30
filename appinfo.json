@@ -1,26 +1,31 @@
 {
-    "uuid": "32ab5abb-26d0-442a-9d4f-989dda780b07",
-    "watchapp": {
-        "watchface": false
-    },
-    "versionLabel": "1.0",
     "companyName": "pierrerohel@gmail.com",
+    "longName": "Weather",
+    "uuid": "32ab5abb-26d0-442a-9d4f-989dda780b07",
     "capabilities": [
         ""
     ],
-    "shortName": "Weather",
-    "longName": "Weather",
-    "versionCode": 1,
+    "versionLabel": "1.0",
     "appKeys": {
-        "hello_msg": 0
+        "temp_msg": 0
     },
+    "watchapp": {
+        "watchface": false
+    },
+    "versionCode": 1,
     "resources": {
         "media": [
             {
-                "type": "png",
+                "file": "images/hot_minion.png",
+                "name": "HOT_MINION",
+                "type": "png"
+            },
+            {
+                "file": "images/minion.png",
                 "name": "MINION",
-                "file": "images/minion.png"
+                "type": "png"
             }
         ]
-    }
+    },
+    "shortName": "Weather"
 }
