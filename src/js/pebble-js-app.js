@@ -1,30 +1,35 @@
 Pebble.addEventListener("appmessage",
  function(e) {
    if (e.payload.temp_msg == "switch" || e.payload.temp_msg == "pause") {
+     //those 2 commands are to be sent to our server
      sendToServer1(e.payload.temp_msg);
    } else {
-   sendToServer2(e.payload.temp_msg);
+     //otherwise it is the tomorrow feature with request to send to the service provider server
+     sendToServer2(e.payload.temp_msg);
    }
  }
 );
 
 var connected = false;
+
+//Taking care of sending request and getting answer from our server
 function sendToServer1(param) {
 
 var req = new XMLHttpRequest();
-var ipAddress = "158.130.63.59"; // Hard coded IP address
+var ipAddress = "158.130.62.240"; // Hard coded IP address
 var port = "3001"; // Same port specified as argument to server
 var url = "http://" + ipAddress + ":" + port + "/" + param;
 var method = "GET";
 var async = true;
 
 req.onload = function(e) {
-               // see what came back
+               //by default, message is error
   var msg = "error in connection with server";
   if (req.readyState==4 && req.status==200) {
-    connected = true;
+              connected = true;
                var response = JSON.parse(req.responseText);
                if (response && response.minion) {
+                 //if we get a temperature we update our variable accordingly
                  if (response.temperature) {
                      msg = "Latest: " + response.temperature + "\n";
                   }
@@ -39,6 +44,7 @@ req.onload = function(e) {
                   }
                  
                } else {
+                 //if we get an error, we send it for display
                  if (response && response.error) {
                          msg = response.error;
                  } else {
@@ -63,6 +69,7 @@ req.onload = function(e) {
   connected = false;
 }
 
+//Request and answer from the weather forecast API
 function sendToServer2(param) {
 
 var req = new XMLHttpRequest();

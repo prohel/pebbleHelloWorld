@@ -1,18 +1,14 @@
 {
-    "companyName": "pierrerohel@gmail.com",
     "longName": "Weather",
-    "uuid": "32ab5abb-26d0-442a-9d4f-989dda780b07",
-    "capabilities": [
-        ""
-    ],
-    "versionLabel": "1.0",
-    "appKeys": {
-        "temp_msg": 0
-    },
     "watchapp": {
         "watchface": false
     },
-    "versionCode": 1,
+    "companyName": "pierrerohel@gmail.com",
+    "shortName": "Weather",
+    "capabilities": [
+        ""
+    ],
+    "uuid": "32ab5abb-26d0-442a-9d4f-989dda780b07",
     "resources": {
         "media": [
             {
@@ -27,5 +23,9 @@
             }
         ]
     },
-    "shortName": "Weather"
+    "versionLabel": "1.0",
+    "appKeys": {
+        "temp_msg": 0
+    },
+    "versionCode": 1
 }

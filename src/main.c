@@ -9,7 +9,7 @@ static char minion[10];
 BitmapLayer *future_layer;
 int pause = 0;
 //static int temp;
-/* This is called when the select button is clicked */
+/* This is called when the selct button is clicked shortly*/
 void select_click_handler(ClickRecognizerRef recognizer, void *context) {
   if (celsius == 0) {
     text_layer_set_text(hello_layer, "switching to Celsius");
@@ -24,7 +24,7 @@ void select_click_handler(ClickRecognizerRef recognizer, void *context) {
   dict_write_tuplet(iter, &value);
   app_message_outbox_send();
 }
-
+/* This is called when the down button is clicked */
 void select_click_down_handler(ClickRecognizerRef recognizer, void *context) {
   DictionaryIterator *iter;
   app_message_outbox_begin(&iter);
@@ -34,6 +34,7 @@ void select_click_down_handler(ClickRecognizerRef recognizer, void *context) {
   app_message_outbox_send();
 }
 
+/* This is called when the select button is clicked for 3 seconds*/
 void pause_handler(ClickRecognizerRef recognizer, void *context) {
   if (pause) {
     text_layer_set_text(hello_layer, "Leaving standby mode");
@@ -48,7 +49,7 @@ void pause_handler(ClickRecognizerRef recognizer, void *context) {
   dict_write_tuplet(iter, &value);
   app_message_outbox_send();
 }
-
+/* This is called when the up button is clicked */
 void init_minion_handler(ClickRecognizerRef recognizer, void *context) {
   Layer *window_layer = window_get_root_layer(window);
   GRect bounds = layer_get_bounds(window_layer);
@@ -96,14 +97,14 @@ void in_received_handler(DictionaryIterator *received, void *context) {
   //text_layer_set_text(hello_layer, "Message received!");
   
   
-  // looks for key #0 in the incoming message
+  // looks for key #0 and #1 in the incoming message
   int key = 0;
   int key2 = 1;
   Tuple *text_tuple = dict_find(received, key);
   Tuple *text_tuple2 = dict_find(received, key2);
   if (text_tuple) {
     if (text_tuple->value) {
-      // put it in this global variable
+      // put message in this global variable
       strcpy(msg, text_tuple->value->cstring);
     }
     else strcpy(msg, "no value!");
@@ -115,7 +116,7 @@ void in_received_handler(DictionaryIterator *received, void *context) {
   }
   if (text_tuple2) {
     if (text_tuple2->value) {
-       //put it in this global variable
+       //put minion in this global variable
        strcpy(minion, text_tuple2->value->cstring);
     }
  }
